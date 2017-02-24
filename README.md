@@ -1,7 +1,7 @@
 Vagrant Virtualbox setup for CS Engine 1.13.1-cs1 on CentOS 7.3
 ========================
 
-An exercise on installing CS Engine and properly configuring Device Mapper on CentOS. This is helpful for walking through the install and configuration of CS Engine before actually doing so in production environments. This vagrant file is provided strictly for educational purposes.
+An exercise on installing CS Engine and properly configuring Device Mapper on CentOS, which may be helpful for walking through the install and configuration of CS Engine before actually doing so in production environments. This vagrant file is provided strictly for educational purposes.
 
 ## Download vagrant from Vagrant website
 
