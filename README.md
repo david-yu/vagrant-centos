@@ -24,9 +24,11 @@ vagrant init centos/7
 vagrant up centos-node
 ```
 
-## Configure Devicemapper
+## Configure Device Mapper
 
-After provisioning the node and installing CS Engine it is highly recommended to configure DeviceMapper to use direct-lvm mode in production. You can read more about selecting Graph Drivers here: https://success.docker.com/KBase/An_Introduction_to_Storage_Solutions_for_Docker_CaaS#Selecting_Graph_Drivers 
+After provisioning the node and installing CS Engine it is highly recommended to configure DeviceMapper to use direct-lvm mode in production. You can read more about selecting Graph Drivers here: https://success.docker.com/KBase/An_Introduction_to_Storage_Solutions_for_Docker_CaaS#Selecting_Graph_Drivers
+
+### Create a Disk for VM in VirtualBox
 
 The best practice for configuring DeviceMapper with Docker is to provide a spare block device to create a logical volume as a thinpool for the graph driver storage. In Virtual Box you may manually create a new disk and attach it to the vm. When you run 'fdisk -l' you should be able to see the disks that are available to you:
 
@@ -55,9 +57,13 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
 
-- Configure Docker to use DeviceMapper as the graph storage driver: [Configure Docker With DeviceMapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper)
+### Configure Device Mapper
 
-Before properly configuring Docker with devicemapper:
+Configure Docker to use DeviceMapper as the graph storage driver: [Configure Docker With DeviceMapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper)
+
+### Validate Docker Device Mapper Config
+
+Before properly configuring Docker with Device Mapper:
 
 ```
 [vagrant@centos-node ~]$ docker info
@@ -74,7 +80,7 @@ Logging Driver: json-file
 ...
 ```
 
-After properly configuring Docker with devicemapper:
+After properly configuring Docker with Device Mapper:
 
 ```
 [vagrant@centos-node ~]$ docker info
