@@ -18,12 +18,6 @@ https://www.virtualbox.org/wiki/Downloads
 vagrant init centos/7
 ```
 
-## Install Vagrant Plugins
-
-```
-vagrant plugin install vagrant-persistent-storage
-```
-
 ## Bring up nodes
 
 ```
@@ -86,7 +80,7 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
 
-The disk will be located on /dev/sdb if you created and attached just a second disk, or /dev/sdc if you created and attached a third disk. Use this as your device when running through the Device Mapper config below.
+The disk will be located on `/dev/sdb` if you created and attached just a second disk, or `/dev/sdc` if you created and attached a third disk. Use this as your device (in stead of `/dev/xvdf`) when running through the Device Mapper config below.
 
 ### Configure Device Mapper
 
