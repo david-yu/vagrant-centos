@@ -13,15 +13,9 @@ https://www.vagrantup.com/downloads.html
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-## Download Xenial box
+## Download CentOS 7 box
 ```
 vagrant init centos/7
-```
-
-## Install Vagrant Plugins
-```
-vagrant plugin install vagrant-hostsupdater
-vagrant plugin install vagrant-multiprovider-snap
 ```
 
 ## Bring up nodes
@@ -32,7 +26,9 @@ vagrant up centos-node
 
 ## Configure Devicemapper
 
-After provisioning the node and installing CS Engine it is highly recommended to configure DeviceMapper to use direct-lvm mode in production. The best practice is to provide a spare block device to create a logical volume as a thinpool. In Virtual Box you may manually create a new disk and attach it to the vm. When you run 'fdisk -l' you should be able to see the disks that are available to you:
+After provisioning the node and installing CS Engine it is highly recommended to configure DeviceMapper to use direct-lvm mode in production. You can read more about selecting Graph Drivers here: https://success.docker.com/KBase/An_Introduction_to_Storage_Solutions_for_Docker_CaaS#Selecting_Graph_Drivers 
+
+The best practice for configuring DeviceMapper with Docker is to provide a spare block device to create a logical volume as a thinpool for the graph driver storage. In Virtual Box you may manually create a new disk and attach it to the vm. When you run 'fdisk -l' you should be able to see the disks that are available to you:
 
 ```
 Disk /dev/sda: 42.9 GB, 42949672960 bytes, 83886080 sectors
@@ -59,9 +55,26 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
 
-[Configure Docker With DeviceMapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper)
+- Configure Docker to use DeviceMapper as the graph storage driver: [Configure Docker With DeviceMapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper)
 
-After properly configuring devicemapper:
+Before properly configuring Docker with devicemapper:
+
+```
+[vagrant@centos-node ~]$ docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 1.13.1-cs2
+Storage Driver: overlay
+ Backing Filesystem: xfs
+ Supports d_type: true
+Logging Driver: json-file
+...
+```
+
+After properly configuring Docker with devicemapper:
 
 ```
 [vagrant@centos-node ~]$ docker info
@@ -92,6 +105,7 @@ Storage Driver: devicemapper
  Library Version: 1.02.135-RHEL7 (2016-09-28)
 Logging Driver: json-file
 Cgroup Driver: cgroupfs
+...
 ```
 
 ## Stop nodes
