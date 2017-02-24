@@ -18,6 +18,12 @@ https://www.virtualbox.org/wiki/Downloads
 vagrant init centos/7
 ```
 
+## Install Vagrant Plugins
+
+```
+vagrant plugin install vagrant-persistent-storage
+```
+
 ## Bring up nodes
 
 ```
@@ -30,9 +36,32 @@ After provisioning the node and installing CS Engine it is highly recommended to
 
 ### Create a Disk for VM in VirtualBox
 
-The best practice for configuring DeviceMapper with Docker is to provide a spare block device to create a logical volume as a thinpool for the graph driver storage. In Virtual Box you may manually create a new disk and attach it to the vm. When you run 'fdisk -l' you should be able to see the disks that are available to you:
+The best practice for configuring DeviceMapper with Docker is to provide a spare block device to create a logical volume as a thinpool for the graph driver storage.
+
+#### Create a Disk
+![Create Disk](images/centos-disk-create.png?raw=true)
+
+#### Choose VMDK Disk type
+![Disk Type](images/centos-disk-type.png?raw=true)
+
+#### Select Disk Size
+![Disk Size](images/centos-disk-size.png?raw=true)
+
+#### Final Disk Config
+![Final Disk Config](images/centos-disk-final.png?raw=true)
+
+In Virtual Box you may manually create a new disk and attach it to the vm. When you run 'fdisk -l' you should be able to see the disks that are available to you:
 
 ```
+[vagrant@centos-node ~]$ sudo su -
+[root@centos-node ~]# fdisk -l
+
+Disk /dev/sdb: 8589 MB, 8589934592 bytes, 16777216 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
 Disk /dev/sda: 42.9 GB, 42949672960 bytes, 83886080 sectors
 Units = sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
@@ -45,13 +74,13 @@ Disk identifier: 0x000dc137
 /dev/sda2   *        4096     2101247     1048576   83  Linux
 /dev/sda3         2101248    83886079    40892416   8e  Linux LVM
 
-Disk /dev/sdb: 5303 MB, 5303697408 bytes, 10358784 sectors
+Disk /dev/mapper/VolGroup00-LogVol00: 40.2 GB, 40231763968 bytes, 78577664 sectors
 Units = sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 
 
-Disk /dev/sdc: 4214 MB, 4214751232 bytes, 8231936 sectors
+Disk /dev/mapper/VolGroup00-LogVol01: 1610 MB, 1610612736 bytes, 3145728 sectors
 Units = sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
