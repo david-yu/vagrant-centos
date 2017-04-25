@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
 
-  # UCP 2.1 node for DDC on CentOS 7.3
+  # Docker EE node for CentOS 7.3
     config.vm.define "centos-node" do |centos_node|
       centos_node.vm.box = "centos/7"
       centos_node.vm.network "private_network", type: "dhcp"
