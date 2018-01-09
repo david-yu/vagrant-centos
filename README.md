@@ -1,7 +1,9 @@
 Vagrant Virtualbox setup for Docker EE Engine on CentOS 7.3
 ========================
 
-An exercise on installing Docker EE Engine and properly configuring Device Mapper on CentOS, which may be helpful for walking through the install and configuration of Docker EE Engine before actually doing so in production environments. This vagrant file is provided strictly for educational purposes. If you're looking for a full cluster deployment of EE Standard and Advanced on CentOS please take a look at this repo: https://github.com/yongshin/vagrant-docker-ee-centos
+An exercise on installing Docker EE Engine and properly configuring Device Mapper on CentOS, which may be helpful for walking through the install and configuration of Docker EE Engine before actually doing so in production environments. This vagrant file is provided strictly for educational purposes.
+
+If you're looking for a full cluster deployment of EE Standard and Advanced on CentOS please take a look at this repo: https://github.com/yongshin/vagrant-docker-ee-centos
 
 ## Download vagrant from Vagrant website
 
@@ -38,7 +40,7 @@ vagrant up centos-node
 
 ## Configure Device Mapper
 
-After provisioning the node and installing Docker EE Engine it is highly recommended to configure DeviceMapper to use direct-lvm mode in production. You can read more about selecting Graph Drivers here: https://success.docker.com/KBase/An_Introduction_to_Storage_Solutions_for_Docker_CaaS#Selecting_Graph_Drivers.
+After provisioning the node and installing Docker EE Engine it is highly recommended to configure DeviceMapper to use direct-lvm mode in production. You can read more about selecting Graph Drivers here: https://success.docker.com/KBase/An_Introduction_to_Storage_Solutions_for_Docker_CaaS#Selecting_Graph_Drivers
 
 ### Create a Disk for VM in VirtualBox
 
